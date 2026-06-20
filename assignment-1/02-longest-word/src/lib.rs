@@ -1,6 +1,37 @@
 pub fn longest_word(sentence: &str) -> Option<&str> {
-    let _ = sentence;
-    todo!("implement longest_word")
+    let mut input = sentence.char_indices();
+
+    let mut max_len = 0;
+    let mut index_l = 0;
+    let mut index_r = 0;
+
+    let mut current_l = 0;
+    let mut len;
+    while let Some((index, c)) = input.next() {
+        match c {
+            ' ' => {
+                len = index - current_l;
+                if len > max_len {
+                    max_len = len;
+                    index_l = current_l;
+                    index_r = index;
+                }
+                current_l = index + 1;
+            }
+            _ => {}
+        }
+    }
+    let final_len = sentence.len() - current_l;
+    if final_len > max_len && final_len > 0 {
+        index_l = current_l;
+        index_r = sentence.len();
+        max_len = final_len;
+    }
+    if max_len == 0 {
+        return None;
+    }
+
+    Some(&sentence[index_l..index_r])
 }
 
 #[cfg(test)]

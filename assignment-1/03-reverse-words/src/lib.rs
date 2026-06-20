@@ -1,6 +1,39 @@
 pub fn reverse_words(sentence: &str) -> String {
-    let _ = sentence;
-    todo!("implement reverse_words")
+    let mut input = sentence.char_indices().rev();
+    let mut result = String::new();
+    let mut flag = false;
+    let mut right_index = 0;
+
+    while let Some((index, c)) = input.next() {
+        match c {
+            ' ' | '\t' | '\n' => {
+                if flag {
+                    let word = &sentence[(index + 1)..right_index];
+
+                    if !result.is_empty() {
+                        result.push(' ');
+                    }
+                    result.push_str(word);
+                    flag = false;
+                }
+            }
+
+            _ => {
+                if !flag {
+                    right_index = index + 1;
+                    flag = true;
+                }
+            }
+        }
+    }
+    if flag {
+        let word = &sentence[0..right_index];
+        if !result.is_empty() {
+            result.push(' ');
+        }
+        result.push_str(word);
+    }
+    result
 }
 
 #[cfg(test)]
