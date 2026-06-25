@@ -2,10 +2,9 @@
 
 ## Approach
 
-_Describe your approach here._
+Simple for loop and geting smallest and largest in one go and returning it.
 
 ## Edge cases handled
-
 
 ## Anything special
 

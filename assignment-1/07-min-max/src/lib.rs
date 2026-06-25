@@ -1,6 +1,19 @@
 pub fn min_max(xs: &[i32]) -> Option<(i32, i32)> {
-    let _ = xs;
-    todo!("implement min_max")
+    let input = xs;
+    if xs.is_empty() {
+        return None;
+    }
+    let mut largest = input[0];
+    let mut smallest = input[0];
+    for &i in input {
+        if largest < i {
+            largest = i;
+        }
+        if smallest > i {
+            smallest = i;
+        }
+    }
+    Some((smallest, largest))
 }
 
 #[cfg(test)]

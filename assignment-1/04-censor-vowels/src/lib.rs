@@ -1,8 +1,15 @@
 pub fn censor_vowels(s: &mut String) {
-    let _ = s;
-    todo!("implement censor_vowels")
-}
+    let input = s.chars();
 
+    let result: String = input.map(change_vowel).collect();
+    *s = result;
+}
+fn change_vowel(c: char) -> char {
+    match c {
+        'a' | 'e' | 'i' | 'o' | 'u' | 'A' | 'E' | 'I' | 'O' | 'U' => '*',
+        _ => c,
+    }
+}
 #[cfg(test)]
 mod tests {
     use super::*;
